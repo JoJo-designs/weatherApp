@@ -1,3 +1,7 @@
 input{
     border: 1 black solid;
 }
+
+div{
+    background: green;
+}
