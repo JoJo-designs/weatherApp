@@ -6,9 +6,29 @@
         <link rel="stylesheet" href="./asset/style.css">
     </header>
     <body>
+        <!--Items in the head-->
         <head>
             <h1>This is the header</h1>
         </head>
+        <!--Aside with search bar and the search history. About 25% of the screen with at larger sizes-->
+        <aside>
+            <input id="searchCities"><button id="search">Search</button>
+            <!--when a city is searched The system will append a div as a child to this section div with 
+            the city name in it. I guess it will also be a quick link to the city in the future.-->
+            <section id="searchHistory"></section> 
+        </aside>
+        <!--Current temps for a selected city.-->
+        <section id="currentCity">
+            <div id="currentWather"></div>
+            <!--five Day forcast is here-->
+            <section id="fiveDay">
+                <div class="day"></div>
+                <div class="day"></div>
+                <div class="day"></div>
+                <div class="day"></div>
+                <div class="day"></div>
+            </section>
+        </section>
     </body>
     <script src="./asset/script.js"></script>
 </html>
