@@ -2,9 +2,12 @@
 console.log("The script is connected");
 
 //Object to store names of searched cities
-var cityList = {
-    cities: [],
-}
+//var cityList = {
+   // cities: [],
+//}
+
+var cities = [];
+
 //Grabing elements by id
 var searchValue = document.getElementById("searchCities").value;
 var searchHistory = document.getElementById("searchHistory");
@@ -14,9 +17,9 @@ var searchButton = document.getElementById("search");
 searchButton.addEventListener("click", function(){
     console.log("A button was clicked")
     //add the values to local stoarge
-    cityList.cities.push(document.getElementById("searchCities").value)
-    console.log(cityList.cities);
-    localStorage.setItem("Cities", JSON.stringify(cityList.cities));
+    cities.push(document.getElementById("searchCities").value)
+    console.log(cities);
+    localStorage.setItem("Cities", JSON.stringify(cities));
     // This adds the new divs when the button is clicked they do not stay after the page
     // is refreshed. 
     var addHistory = document.createElement("div")
@@ -24,24 +27,22 @@ searchButton.addEventListener("click", function(){
     searchHistory.appendChild(addHistory)
 });
 
-// Function that will hopefully loop thought the values in the cityList.cities array and make 
-//a div to display each on the page.
+// Function that will hopefully loop thought the values in the cities array and make 
+//a div to display each on the page. so far it doesn't do any of that.
 function buildHistoryElements() {
-   console.log(localStorage.getItem(cityList.cities));
+    console.log("this function is running")
+    var location = localStorage.getItem("Cities");
+    location = JSON.parse(location)
+    console.log(location)
+    //above this line is working
 
-   //for (var i = 0; i < cityList.cities.length; i++) {
-       //const element = cityList.cities[i];
-       //}
+    for (var i = 0; i < location.length; i++) {
+        var elements = location[i];
+    }
+    console.log(location[i])
+    console.log(elements)
 
-    // attempt to make just one appear  
-    var addHistory = document.createElement("div");
-    var cityName = localStorage.getItem( JSON.parse("Cities"))
-    addHistory.textContent = cityName
-    //line under works but it put the whole array in the div
-    //addHistory.textContent = localStorage.getItem(("Cities")
-    searchHistory.appendChild(addHistory)
-    
+
 }
-
 
 buildHistoryElements (); 
