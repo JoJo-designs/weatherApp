@@ -14,21 +14,17 @@ var searchHistory = document.getElementById("searchHistory");
 var searchButton = document.getElementById("search");
 
 
+//Add an eventlistener to the search button
 searchButton.addEventListener("click", function(){
     console.log("A button was clicked")
     //add the values to local stoarge
-    cities.push(document.getElementById("searchCities").value)
-    console.log(cities);
+    cities = JSON.parse(localStorage.getItem("Cities")) || [];
+    cities.push(document.getElementById("searchCities").value);
     localStorage.setItem("Cities", JSON.stringify(cities));
-    // This adds the new divs when the button is clicked they do not stay after the page
-    // is refreshed. 
-    var addHistory = document.createElement("div")
-    addHistory.textContent = document.getElementById("searchCities").value
-    searchHistory.appendChild(addHistory)
+    console.log(cities);
 });
 
-// Function that will hopefully loop thought the values in the cities array and make 
-//a div to display each on the page. so far it doesn't do any of that.
+// Function loop thought the values in local storageand builds and element for each.
 function buildHistoryElements() {
     console.log("this function is running")
     var location = localStorage.getItem("Cities");
@@ -38,11 +34,20 @@ function buildHistoryElements() {
 
     for (var i = 0; i < location.length; i++) {
         var elements = location[i];
+        console.log(elements)
+    
+    //Builds the elements. 
+    var addHistory = document.createElement("div")
+    addHistory.textContent = elements
+    searchHistory.appendChild(addHistory)
     }
-    console.log(location[i])
-    console.log(elements)
-
 
 }
 
 buildHistoryElements (); 
+
+//might help https://stackoverflow.com/questions/45721167/localstorage-array-is-being-overwritten-after-refresh/45723442
+
+    //cities = JSON.parse(localStorage.getItem("Cities")) || [];
+    //cities.push(searchValue);
+    //localStorage.setItem("Cities", JSON.stringify(cities));
