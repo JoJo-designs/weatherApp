@@ -22,6 +22,9 @@ searchButton.addEventListener("click", function(){
     cities.push(document.getElementById("searchCities").value);
     localStorage.setItem("Cities", JSON.stringify(cities));
     console.log(cities);
+    var putHistory = document.createElement("div")
+    putHistory.textContent = document.getElementById("searchCities").value
+    searchHistory.appendChild(putHistory)
     callApi();
 });
 
@@ -29,15 +32,18 @@ searchButton.addEventListener("click", function(){
 //This is a funtion that was suppost to check if toronto was already in the array 
 //It only works when their is already something in the array.
 //I wanted it to add something to the array so I guess this is not going to work but everthing else seems fine.
+//I am going to try something else but I will keep this here for now.
 function checkForToronto() {
   if (cities.indexOf("Toronto")){
-     callStarterValue ();
+    console.log("Toronto is in the Array")
+     //callStarterValue ();
    } else {
     //commented out line make it so the value are not overwitten but Toronto is added over and over again.
     //cities = JSON.parse(localStorage.getItem("Cities")) || [];
+    console.log("toronto is not in the array")
     localStorage.setItem("Cities", JSON.stringify(cities));
     cities.push("Toronto")
-     callStarterValue ();
+     //callStarterValue ();
    }
 };
 
@@ -49,6 +55,10 @@ function callStarterValue() {
     //creates a value to start with 
     var starterValue = "https://api.openweathermap.org/data/2.5/weather?q=toronto&appid=89e0b7e8dbbac9434ed75176dac7f8a3&units=metric"
     var starterValueTwo = "https://api.openweathermap.org/data/2.5/forecast?q=toronto&appid=89e0b7e8dbbac9434ed75176dac7f8a3&units=metric"
+
+      cities = JSON.parse(localStorage.getItem("Cities")) || [];
+      cities.push("Toronto")
+      localStorage.setItem("Cities", JSON.stringify(cities));
 
     //gets the current weather conditions for starter data
     fetch(starterValue)
@@ -128,7 +138,6 @@ function buildHistoryElements() {
     var location = localStorage.getItem("Cities");
     location = JSON.parse(location)
     console.log(location)
-    //above this line is working
 
     for (var i = 0; i < location.length; i++) {
         var elements = location[i];
@@ -141,7 +150,8 @@ function buildHistoryElements() {
     }
 }
 
-checkForToronto ();
+//checkForToronto ();
+callStarterValue ();
 
 // Api Link "https://api.openweathermap.org/data/2.5/weather?q="  CITY NAME HERE  "&appid=89e0b7e8dbbac9434ed75176dac7f8a3" current weather
 // Api Link "https://api.openweathermap.org/data/2.5/forecast?q=" CITY NAME HERE  "&appid=89e0b7e8dbbac9434ed75176dac7f8a3" 5 day forcast
