@@ -25,17 +25,20 @@ searchButton.addEventListener("click", function(){
     callApi();
 });
 
-function checkForToronto(){
-  if (cities.length == 0){
-    cities = JSON.parse(localStorage.getItem("Cities")) || [];
-     cities.push("Toronto")
-     localStorage.setItem("Cities", JSON.stringify(cities));
-     console.log(cities);
+//This is a funtion that was suppost to check if toronto was already in the array it work once than broke
+function checkForToronto() {
+  if (cities.indexOf("Toronto")){
      callStarterValue ();
    } else {
+    //commented out line make it so the value are not overwitten but makes it so Toronto is added over and over again.
+    //cities = JSON.parse(localStorage.getItem("Cities")) || [];
+    cities.push("Toronto")
+    localStorage.setItem("Cities", JSON.stringify(cities));
      callStarterValue ();
    }
 };
+
+
 
 //Calls a starter value so there is always data to display
 function callStarterValue() {
@@ -74,6 +77,9 @@ function callStarterValue() {
      });
     buildHistoryElements ();
 }
+
+
+
 
 function callApi(){
     //I need to come up with a way to get the value of the input box and use it as part of the link.
@@ -131,9 +137,7 @@ function buildHistoryElements() {
     }
 }
 
-
-
-
+//callStarterValue();
 checkForToronto ();
 
 // API Link api.openweathermap.org/data/2.5/weather?q=  CITY NAME HERE  &appid=89e0b7e8dbbac9434ed75176dac7f8a3

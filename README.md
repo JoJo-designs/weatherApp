@@ -11,3 +11,5 @@ The next thing I want to get working is the search system. It needed to pull in 
 This link to the api is now working and I create a second function that will automatically call the weather data for toronto and push it into the history array when the program loads. This got rid of an error that would happen where their were no values saved in local storage. I was able to do this without needing to ask for any help so it is a personal win! this function runs everytime it is refreshed so I need come up with a way to stop it from adding toronto over and over. 
 
 
+
+
