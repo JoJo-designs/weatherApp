@@ -7,6 +7,7 @@ console.log("The script is connected");
 //}
 
 var cities = [];
+var toronto = [];
 
 //Grabing elements by id
 var searchHistory = document.getElementById("searchHistory");
@@ -27,6 +28,7 @@ searchButton.addEventListener("click", function(){
     searchHistory.appendChild(putHistory)
     callApi();
 });
+//End of the eventListener
 
 
 //This is a funtion that was suppost to check if toronto was already in the array 
@@ -34,20 +36,18 @@ searchButton.addEventListener("click", function(){
 //I wanted it to add something to the array so I guess this is not going to work but everthing else seems fine.
 //I am going to try something else but I will keep this here for now.
 function checkForToronto() {
-  if (cities.indexOf("Toronto")){
-    console.log("Toronto is in the Array")
-     //callStarterValue ();
+  if (cities.includes("Toronto")){
+    callStarterValue ();
    } else {
     //commented out line make it so the value are not overwitten but Toronto is added over and over again.
     //cities = JSON.parse(localStorage.getItem("Cities")) || [];
-    console.log("toronto is not in the array")
     localStorage.setItem("Cities", JSON.stringify(cities));
     cities.push("Toronto")
-     //callStarterValue ();
+    console.log("put Value")
+    callStarterValue ();
    }
-};
-
-
+}; 
+//End of the checkForToronto
 
 //Calls a starter value so there is always data to display.
 //Value is set to toronto
@@ -56,9 +56,9 @@ function callStarterValue() {
     var starterValue = "https://api.openweathermap.org/data/2.5/weather?q=toronto&appid=89e0b7e8dbbac9434ed75176dac7f8a3&units=metric"
     var starterValueTwo = "https://api.openweathermap.org/data/2.5/forecast?q=toronto&appid=89e0b7e8dbbac9434ed75176dac7f8a3&units=metric"
 
-      cities = JSON.parse(localStorage.getItem("Cities")) || [];
-      cities.push("Toronto")
-      localStorage.setItem("Cities", JSON.stringify(cities));
+    cities = JSON.parse(localStorage.getItem("Cities")) || [];
+    cities.push("Toronto")
+    localStorage.setItem("Cities", JSON.stringify(cities));
 
     //gets the current weather conditions for starter data
     fetch(starterValue)
@@ -91,10 +91,9 @@ function callStarterValue() {
      });
     buildHistoryElements ();
 }
+//End of the callStarterData
 
-
-
-//Calls the Data for user entered Locations
+//Calls the Data for user entered locations
 function callApi(){
     var searchValue = document.getElementById("searchCities").value.trim();
     var currentWeatherApi = "https://api.openweathermap.org/data/2.5/weather?q=" + searchValue + "&appid=89e0b7e8dbbac9434ed75176dac7f8a3&units=metric"
@@ -130,6 +129,7 @@ function callApi(){
             console.log('Unable to connect');
           });
 }
+//end of callApi
 
 // Function loop thought the values in local storage and builds and element for each. it only runs after a refresh.
 // I need to make a function that build the elements that has just been added. 
@@ -149,9 +149,10 @@ function buildHistoryElements() {
     searchHistory.appendChild(addHistory)
     }
 }
+//End of the buildHistoryElements
 
-//checkForToronto ();
-callStarterValue ();
+checkForToronto ();
+//callStarterValue ();
 
 // Api Link "https://api.openweathermap.org/data/2.5/weather?q="  CITY NAME HERE  "&appid=89e0b7e8dbbac9434ed75176dac7f8a3" current weather
 // Api Link "https://api.openweathermap.org/data/2.5/forecast?q=" CITY NAME HERE  "&appid=89e0b7e8dbbac9434ed75176dac7f8a3" 5 day forcast
