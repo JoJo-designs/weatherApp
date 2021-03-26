@@ -7,8 +7,13 @@ var cities = [];
 //Grabing elements by id
 var searchHistory = document.getElementById("searchHistory");
 var searchButton = document.getElementById("search");
-var element;
 
+//Grab elements that need to be filled in with data from the response.
+var nameCity = document.querySelector("#nameCity")
+console.log(nameCity)
+
+
+var element;
 
 
 //Add an eventlistener to the search button
@@ -29,18 +34,21 @@ searchButton.addEventListener("click", function(){
 });
 //End of the eventListener for search button
 
+
+
+
 //add event listener to the divs in the search history.
 // I need to make the div clickable - Done
 // I need to be able read the value inside the div. - working on
 // I need to make the searchValue be equivalant to the value inside 
 // I need to run the getApi function.
+//I will need some help with this I think.
 searchHistory.addEventListener("click", function(){
   console.log("A element in the search history was clicked");
-  //var searchDivs = document.querySelector(".history").value
-  var search = element.dataset.cityname;
-  //var searchDiv = document.
-  console.log(search);
+  //var search = element.dataset.cityname;
+  //console.log(search);
 })
+// End of the event listener on the searchHistory.
 
 
 //This is a funtion that was suppost to check if toronto was already in the array 
@@ -62,7 +70,7 @@ function checkForToronto() {
 //End of the checkForToronto
 
 //Calls a starter value so there is always data to display.
-//Value is set to toronto
+//Value is set to Toronto
 function callStarterValue() {
     //creates a value to start with 
     var starterValue = "https://api.openweathermap.org/data/2.5/weather?q=toronto&appid=89e0b7e8dbbac9434ed75176dac7f8a3&units=metric"
@@ -87,12 +95,12 @@ function callStarterValue() {
        console.log('Unable to connect');
      });
 
-//Get five day weather for the starter data.
-     fetch(starterValueTwo)
+    //Get five day weather for the starter data.
+    fetch(starterValueTwo)
     .then(function (response) {
        if (response.ok) {
-         response.json().then(function (data) {
-         console.log(data)
+         response.json().then(function (dataWeekly) {
+         console.log(dataWeekly)
          });
        } else {
          console.log('Error: ' + response.statusText);
@@ -130,8 +138,8 @@ function callApi(){
           fetch(fiveDayApi)
          .then(function (response) {
             if (response.ok) {
-              response.json().then(function (data) {
-              console.log(data)
+              response.json().then(function (dataWeekly) {
+              console.log(dataWeekly)
               });
             } else {
               console.log('Error: ' + response.statusText);
@@ -169,9 +177,18 @@ function buildHistoryElements() {
 //End of the buildHistoryElements
 
 
+
+
+
+
+
+
+
+
 //Call the start of the program.
 //checkForToronto ();
 callStarterValue ();
+
 
 
 // Api Link "https://api.openweathermap.org/data/2.5/weather?q="  CITY NAME HERE  "&appid=89e0b7e8dbbac9434ed75176dac7f8a3" current weather

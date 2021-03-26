@@ -2,6 +2,10 @@ input{
     border: 1 black solid;
 }
 
-div{
-    background: green;
+.history {
+    background: grey;
+}
+
+div {
+    background: honeydew;
 }
