@@ -1,17 +1,13 @@
 //Makeing sure script is connected
 console.log("The script is connected");
 
-//Object to store names of searched cities
-//var cityList = {
-   // cities: [],
-//}
 
 var cities = [];
-var toronto = [];
 
 //Grabing elements by id
 var searchHistory = document.getElementById("searchHistory");
 var searchButton = document.getElementById("search");
+var element;
 
 
 
@@ -23,12 +19,28 @@ searchButton.addEventListener("click", function(){
     cities.push(document.getElementById("searchCities").value);
     localStorage.setItem("Cities", JSON.stringify(cities));
     console.log(cities);
+    //Builds elements when new searches are made
     var putHistory = document.createElement("div")
     putHistory.textContent = document.getElementById("searchCities").value
+    putHistory.dataset.cityname = document.getElementById("searchCities").value
+    putHistory.classList.add("history")
     searchHistory.appendChild(putHistory)
     callApi();
 });
-//End of the eventListener
+//End of the eventListener for search button
+
+//add event listener to the divs in the search history.
+// I need to make the div clickable - Done
+// I need to be able read the value inside the div. - working on
+// I need to make the searchValue be equivalant to the value inside 
+// I need to run the getApi function.
+searchHistory.addEventListener("click", function(){
+  console.log("A element in the search history was clicked");
+  //var searchDivs = document.querySelector(".history").value
+  var search = element.dataset.cityname;
+  //var searchDiv = document.
+  console.log(search);
+})
 
 
 //This is a funtion that was suppost to check if toronto was already in the array 
@@ -40,7 +52,7 @@ function checkForToronto() {
     callStarterValue ();
    } else {
     //commented out line make it so the value are not overwitten but Toronto is added over and over again.
-    //cities = JSON.parse(localStorage.getItem("Cities")) || [];
+    cities = JSON.parse(localStorage.getItem("Cities")) || [];
     localStorage.setItem("Cities", JSON.stringify(cities));
     cities.push("Toronto")
     console.log("put Value")
@@ -131,6 +143,9 @@ function callApi(){
 }
 //end of callApi
 
+
+
+
 // Function loop thought the values in local storage and builds and element for each. it only runs after a refresh.
 // I need to make a function that build the elements that has just been added. 
 function buildHistoryElements() {
@@ -146,14 +161,20 @@ function buildHistoryElements() {
     //Builds the elements. 
     var addHistory = document.createElement("div")
     addHistory.textContent = elements
+    addHistory.dataset.cityname = elements
+    addHistory.classList.add("history")
     searchHistory.appendChild(addHistory)
     }
 }
 //End of the buildHistoryElements
 
-checkForToronto ();
-//callStarterValue ();
+
+//Call the start of the program.
+//checkForToronto ();
+callStarterValue ();
+
 
 // Api Link "https://api.openweathermap.org/data/2.5/weather?q="  CITY NAME HERE  "&appid=89e0b7e8dbbac9434ed75176dac7f8a3" current weather
 // Api Link "https://api.openweathermap.org/data/2.5/forecast?q=" CITY NAME HERE  "&appid=89e0b7e8dbbac9434ed75176dac7f8a3" 5 day forcast
 //Key 89e0b7e8dbbac9434ed75176dac7f8a3
+
