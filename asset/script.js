@@ -52,7 +52,7 @@ searchHistory.addEventListener("click", function(){
   console.log("A element in the search history was clicked");
   var selected = document.getElementsByClassName("history");
  // var search = element.dataset.cityname;
-  //console.log(searchHistory.value);
+  console.log(searchHistory);
   console.log(selected);
 })
 // End of the event listener on the searchHistory.
