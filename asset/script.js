@@ -1,9 +1,13 @@
 //Makeing sure script is connected
 console.log("The script is connected");
 
-
+//cities array
 var cities = [];
+function getHistory() {
+  localStorage.getItem("Cities")
+}
 
+var dataValues = {};
 
 //Grabing elements by id
 var searchHistory = document.getElementById("searchHistory");
@@ -46,22 +50,18 @@ searchButton.addEventListener("click", function(){
 //I will need some help with this I think.
 searchHistory.addEventListener("click", function(){
   console.log("A element in the search history was clicked");
-  //var search = element.dataset.cityname;
-  //console.log(search);
+  var selected = document.getElementsByClassName("history");
+ // var search = element.dataset.cityname;
+  //console.log(searchHistory.value);
+  console.log(selected);
 })
 // End of the event listener on the searchHistory.
 
 
 //This is a funtion that was suppost to check if toronto was already in the array 
-//It only works when their is already something in the array.
-// I don't think I need this anymore I will just have toronto set as the default I won't set it to the array.
 function checkForToronto() {
-  if (cities.length === 0 ){
-    cities = JSON.parse(localStorage.getItem("Cities")) || [];
-    localStorage.setItem("Cities", JSON.stringify(cities));
-    cities.push("Toronto")
-    console.log("put Value")
-    callStarterValue ();
+  if (cities.length === 0){
+    addHistoryItem ();
    } else {
     //commented out line make it so the value are not overwitten but Toronto is added over and over again.
     callStarterValue ();
@@ -69,8 +69,25 @@ function checkForToronto() {
 }; 
 //End of the checkForToronto
 
+function getHistory() {
+  //localStorage.getItem("Cities")
+  cities = JSON.parse(localStorage.getItem("Cities")) || [];
+}
+
+function addHistoryItem(x) {
+    //cities = JSON.parse(localStorage.getItem("Cities")) || [];
+    cities.push("Toronto");
+    localStorage.setItem("Cities", JSON.stringify(cities));
+    console.log("put Value");
+    callStarterValue ();
+}
+
+
+
+
+
 //Calls a starter value so there is always data to display.
-//Value is set to Toronto
+//Value is set to Toronto to start with.
 function callStarterValue() {
     //creates a value to start with 
     var starterValue = "https://api.openweathermap.org/data/2.5/weather?q=toronto&appid=89e0b7e8dbbac9434ed75176dac7f8a3&units=metric"
@@ -109,7 +126,7 @@ function callStarterValue() {
      .catch(function () {
        console.log('Unable to connect');
      });
-    //buildHistoryElements ();
+    buildHistoryElements ();
 }
 //End of the callStarterData
 
@@ -164,7 +181,7 @@ function buildHistoryElements() {
         var elements = location[i];
         console.log(elements)
     
-    //Builds the elements. 
+    //Builds the elements in search . 
     var addHistory = document.createElement("div")
     addHistory.textContent = elements
     addHistory.dataset.cityname = elements
@@ -186,13 +203,13 @@ function fillData(data) {
 
 
 //Call the start of the program.
-checkForToronto ();
+checkForToronto (getHistory());
 //callStarterValue ();
-buildHistoryElements ();
+//buildHistoryElements ();
 
 
 
-// Api Link "https://api.openweathermap.org/data/2.5/weather?q="  CITY NAME HERE  "&appid=89e0b7e8dbbac9434ed75176dac7f8a3" current weather
-// Api Link "https://api.openweathermap.org/data/2.5/forecast?q=" CITY NAME HERE  "&appid=89e0b7e8dbbac9434ed75176dac7f8a3" 5 day forcast
+// Api Link "https://api.openweathermap.org/data/2.5/weather?q="  CITY NAME HERE  "&appid=Key Here" current weather
+// Api Link "https://api.openweathermap.org/data/2.5/forecast?q=" CITY NAME HERE  "&appid=key here" 5 day forcast
 //Key 89e0b7e8dbbac9434ed75176dac7f8a3
 
