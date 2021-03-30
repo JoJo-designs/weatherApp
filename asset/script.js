@@ -19,6 +19,7 @@ console.log(nameCity)
 
 
 var element;
+var searchHistoryValue = [];
 
 
 //Add an eventlistener to the search button
@@ -32,7 +33,6 @@ searchButton.addEventListener("click", function(){
     //Builds elements when new searches are made
     var putHistory = document.createElement("div")
     putHistory.textContent = document.getElementById("searchCities").value
-    putHistory.dataset.cityname = document.getElementById("searchCities").value
     putHistory.classList.add("history")
     searchHistory.appendChild(putHistory)
     callApi();
@@ -43,18 +43,12 @@ searchButton.addEventListener("click", function(){
 
 
 //add event listener to the divs in the search history.
-// I need to make the div clickable - Done
-// I need to be able read the value inside the div. - working on
-// I need to make the searchValue be equivalant to the value inside 
-// I need to run the getApi function.
-//I will need some help with this I think.
-searchHistory.addEventListener("click", function(){
+searchHistory.addEventListener("click", function(event){
+  var target = event.target; 
+  console.log("element clicked:" , target.innerText)
+  searchHistoryValue.push(target.innerText)
   console.log("A element in the search history was clicked");
-  var selected = document.getElementsByClassName("history");
- // var search = element.dataset.cityname;
-  console.log(searchHistory);
-  console.log(searchHistory.value);
-  console.log(selected);
+  callHistoryApi()
 })
 // End of the event listener on the searchHistory.
 
@@ -131,6 +125,44 @@ function callStarterValue() {
 }
 //End of the callStarterData
 
+//calls Apis for the cities in the history.
+function callHistoryApi(){
+  //var searchHistoryValue = ;
+  var currentWeatherApi = "https://api.openweathermap.org/data/2.5/weather?q=" + searchHistoryValue + "&appid=89e0b7e8dbbac9434ed75176dac7f8a3&units=metric"
+  var fiveDayApi = "https://api.openweathermap.org/data/2.5/forecast?q=" + searchHistoryValue + "&appid=89e0b7e8dbbac9434ed75176dac7f8a3&units=metric"
+
+  //gets the current weather conditions for user choosen city
+      fetch(currentWeatherApi)
+       .then(function (response) {
+          if (response.ok) {
+            response.json().then(function (data) {
+            console.log(data)
+            });
+          } else {
+            console.log('Error: ' + response.statusText);
+          }
+        })
+        .catch(function () {
+          console.log('Unable to connect');
+        });
+
+  //et five day weather for User choosen city
+        fetch(fiveDayApi)
+       .then(function (response) {
+          if (response.ok) {
+            response.json().then(function (dataWeekly) {
+            console.log(dataWeekly)
+            });
+          } else {
+            console.log('Error: ' + response.statusText);
+          }
+        })
+        .catch(function () {
+          console.log('Unable to connect');
+        });
+}
+//end of callHistoryApi
+
 
 //Calls the data for user entered locations
 function callApi(){
@@ -185,7 +217,6 @@ function buildHistoryElements() {
     //Builds the elements in search . 
     var addHistory = document.createElement("div")
     addHistory.textContent = elements
-    addHistory.dataset.cityname = elements
     addHistory.classList.add("history")
     searchHistory.appendChild(addHistory)
     }
@@ -205,12 +236,11 @@ function fillData(data) {
 
 //Call the start of the program.
 checkForToronto (getHistory());
-//callStarterValue ();
-//buildHistoryElements ();
 
 
 
 // Api Link "https://api.openweathermap.org/data/2.5/weather?q="  CITY NAME HERE  "&appid=Key Here" current weather
 // Api Link "https://api.openweathermap.org/data/2.5/forecast?q=" CITY NAME HERE  "&appid=key here" 5 day forcast
 //Key 89e0b7e8dbbac9434ed75176dac7f8a3
+// useful video https://www.youtube.com/watch?v=InoAIgBZIEA
 
