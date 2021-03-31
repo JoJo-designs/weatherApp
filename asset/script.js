@@ -7,19 +7,21 @@ function getHistory() {
   localStorage.getItem("Cities")
 }
 
-var data;
-var dataWeekly;
+//grabs data for the current date api
+var currentData = {
+
+};
+
+// grabs the data for the 5 day forcast.
+var fivedays = {
+
+};
+
 
 //Grabing elements by id
 var searchHistory = document.getElementById("searchHistory");
 var searchButton = document.getElementById("search");
 
-//Grab elements that need to be filled in with data from the response.
-var nameCity = document.querySelector("#nameCity")
-console.log(nameCity)
-
-// var nameOfCity = data.name;
-// console.log(nameOfCity)
 
 
 var element;
@@ -101,9 +103,14 @@ function callStarterValue() {
     fetch(starterValue)
     .then(function (response) {
        if (response.ok) {
-         data = response.json().then(function (data) {
+         response.json().then(function (data) {
+         currentData.name = data.name;
+         currentData.temp = data.main.temp;
+         currentData.humi = data.main.humidity;
+         currentData.windspeed = data.wind.speed;
+         currentData.icon = data.weather[0].icon;
          console.log(data)
-         fillData (data);
+         fillData ();
          //console.log (data.name)
          });
        } else {
@@ -119,7 +126,13 @@ function callStarterValue() {
     .then(function (response) {
        if (response.ok) {
          response.json().then(function (dataWeekly) {
+         fivedays.dayA = dataWeekly.list[1];
+         fivedays.dayB = dataWeekly.list[2];
+         fivedays.dayC = dataWeekly.list[3];
+         fivedays.dayD = dataWeekly.list[4];
+         fivedays.dayE = dataWeekly.list[5];
          console.log(dataWeekly)
+         filldaily();
          });
        } else {
          console.log('Error: ' + response.statusText);
@@ -145,7 +158,13 @@ function callHistoryApi(){
        .then(function (response) {
           if (response.ok) {
             response.json().then(function (data) {
+              currentData.name = data.name
+              currentData.temp = data.main.temp
+              currentData.humi = data.main.humidity
+              currentData.windspeed = data.wind.speed
+              currentData.icon = data.weather[0].icon
             console.log(data)
+            fillData ();
             });
           } else {
             console.log('Error: ' + response.statusText);
@@ -184,7 +203,13 @@ function callApi(){
          .then(function (response) {
             if (response.ok) {
               response.json().then(function (data) {
+                currentData.name = data.name
+                currentData.temp = data.main.temp
+                currentData.humi = data.main.humidity
+                currentData.windspeed = data.wind.speed
+                currentData.icon = data.weather[0].icon
               console.log(data)
+              fillData ();
               });
             } else {
               console.log('Error: ' + response.statusText);
@@ -234,16 +259,65 @@ function buildHistoryElements() {
 
 
 
+//Grab elements that need to be filled in with data from the response.
+var nameCity = document.querySelector("#nameCity")
+var dateHere = document.querySelector("#date")
+var today = moment().format("ddd MMM, D");
+var temp = document.querySelector("#temp")
+var humi = document.querySelector("#humidiy")
+var windspeed = document.querySelector("#wind")
+var img = document.querySelector("#weatherPicOne")
+var image = "http://openweathermap.org/img/w/" + currentData.icon + ".png";
 
+
+
+//function builds the data for the curent weather block.
 function fillData() {
-  console.log(data)
+  console.log(currentData)
+  nameCity.textContent = currentData.name;
+  dateHere.innerHTML = today;
+  // need a way to add the degree symbol to the temp code.
+  temp.textContent = Math.floor(currentData.temp);
+  humi.textContent = currentData.humi + "%";
+  windspeed.textContent= Math.floor(currentData.windspeed);
+  // need Help connecting the images to the page
+  //img.textContent("src", image)
+
 }
 
+// currentData.name = data.name
+// currentData.temp = data.main.temp
+// currentData.humi = data.main.humidity
+// currentData.windspeed = data.wind.speed
+// currentData.icon = data.weather[0].icon
+
+var fiveday = document.getElementById("fiveDay")
 
 
+//build elementsfor the 5 day forecast.
+function filldaily() {
+  console.log(fivedays)
+  console.log(fivedays.dayA.dt_txt)
+  //creates the blocks the data will sit in.
+  var block = document.createElement("div")
+  block.classList.add("datesContain")
+  //creates a h3 tag for the date
+  var dateBlock = document.createElement("h3")
+  dateBlock.classList.add("ThisDate")
+  dateBlock.textContent = fivedays.dayA.dt_txt
+  // creates a p tag for the temp
+  var tempBlock = document.createElement("p")
+  tempBlock.textContent = Math.floor(fivedays.dayA.main.temp);
+  fiveday.appendChild(block)
+  block.appendChild(dateBlock)
+  block.appendChild(tempBlock)
+}
 
-
-
+// sample
+// var addHistory = document.createElement("div")
+// addHistory.textContent = elements
+// addHistory.classList.add("history")
+// searchHistory.appendChild(addHistory)
 
 //Call the start of the program.
 checkForToronto (getHistory());

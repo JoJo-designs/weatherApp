@@ -12,7 +12,9 @@ This link to the api is now working and I create a second function that will aut
 
 I have been able to call the data for the api using the elements from the history and the values entered by the user as well as the value that is loaded when the program loads.
 
-What I still need to accomplish is finding a way to push the retrived data values to the global scope so I can use it to build the elements that display the data. I will also need to make a four loop that build the 5 day forcast elements since their will be muilple of these these. 
+What I still need to accomplish is finding a way to push the retrived data values to the global scope so I can use it to build the elements that display the data. I will also need to make a four loop that build the 5 day forcast elements since their will be muilple of these these. The data I need to build the elements is now in the global scope. I have used the data to build the current weather section.
+
+My next step is to build the five day forecast. I think I will start by making and appending the data for one day after I do that I will build a forloop to handle the rest. 
 
 
 
