@@ -7,7 +7,8 @@ function getHistory() {
   localStorage.getItem("Cities")
 }
 
-var dataValues = {};
+var data;
+var dataWeekly;
 
 //Grabing elements by id
 var searchHistory = document.getElementById("searchHistory");
@@ -16,6 +17,9 @@ var searchButton = document.getElementById("search");
 //Grab elements that need to be filled in with data from the response.
 var nameCity = document.querySelector("#nameCity")
 console.log(nameCity)
+
+// var nameOfCity = data.name;
+// console.log(nameOfCity)
 
 
 var element;
@@ -53,7 +57,9 @@ searchHistory.addEventListener("click", function(event){
 // End of the event listener on the searchHistory.
 
 
-//This is a funtion that was suppost to check if toronto was already in the array 
+
+
+//This is a funtion that check to see if the application has been loaded before if it will run addHistoryItem function
 function checkForToronto() {
   if (cities.length === 0){
     addHistoryItem ();
@@ -64,19 +70,22 @@ function checkForToronto() {
 }; 
 //End of the checkForToronto
 
+
+
+// function that pulls the cities array from local storage
 function getHistory() {
   //localStorage.getItem("Cities")
   cities = JSON.parse(localStorage.getItem("Cities")) || [];
 }
 
+// function the pushed the value toronto into the history array when the pae loads 
 function addHistoryItem(x) {
-    //cities = JSON.parse(localStorage.getItem("Cities")) || [];
     cities.push("Toronto");
     localStorage.setItem("Cities", JSON.stringify(cities));
     console.log("put Value");
     callStarterValue ();
 }
-
+// end of functions that check history. 
 
 
 
@@ -88,16 +97,14 @@ function callStarterValue() {
     var starterValue = "https://api.openweathermap.org/data/2.5/weather?q=toronto&appid=89e0b7e8dbbac9434ed75176dac7f8a3&units=metric"
     var starterValueTwo = "https://api.openweathermap.org/data/2.5/forecast?q=toronto&appid=89e0b7e8dbbac9434ed75176dac7f8a3&units=metric"
 
-    //  cities = JSON.parse(localStorage.getItem("Cities")) || [];
-    //  cities.push("Toronto")
-    //  localStorage.setItem("Cities", JSON.stringify(cities));
-
     //gets the current weather conditions for starter data
     fetch(starterValue)
     .then(function (response) {
        if (response.ok) {
-         response.json().then(function (data) {
+         data = response.json().then(function (data) {
          console.log(data)
+         fillData (data);
+         //console.log (data.name)
          });
        } else {
          console.log('Error: ' + response.statusText);
@@ -122,12 +129,14 @@ function callStarterValue() {
        console.log('Unable to connect');
      });
     buildHistoryElements ();
-}
+    //fillData (data);
+} 
 //End of the callStarterData
+
+
 
 //calls Apis for the cities in the history.
 function callHistoryApi(){
-  //var searchHistoryValue = ;
   var currentWeatherApi = "https://api.openweathermap.org/data/2.5/weather?q=" + searchHistoryValue + "&appid=89e0b7e8dbbac9434ed75176dac7f8a3&units=metric"
   var fiveDayApi = "https://api.openweathermap.org/data/2.5/forecast?q=" + searchHistoryValue + "&appid=89e0b7e8dbbac9434ed75176dac7f8a3&units=metric"
 
@@ -185,7 +194,7 @@ function callApi(){
             console.log('Unable to connect');
           });
 
-    //et five day weather for User choosen city
+    //get five day weather for User choosen city
           fetch(fiveDayApi)
          .then(function (response) {
             if (response.ok) {
@@ -224,8 +233,10 @@ function buildHistoryElements() {
 //End of the buildHistoryElements
 
 
-function fillData(data) {
-  
+
+
+function fillData() {
+  console.log(data)
 }
 
 

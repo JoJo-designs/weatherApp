@@ -10,6 +10,10 @@ The next thing I want to get working is the search system. It needed to pull in 
 
 This link to the api is now working and I create a second function that will automatically call the weather data for toronto and push it into the history array when the program loads. This got rid of an error that would happen where their were no values saved in local storage. I was able to do this without needing to ask for any help so it is a personal win! this function runs everytime it is refreshed so I need come up with a way to stop it from adding toronto over and over. 
 
+I have been able to call the data for the api using the elements from the history and the values entered by the user as well as the value that is loaded when the program loads.
+
+What I still need to accomplish is finding a way to push the retrived data values to the global scope so I can use it to build the elements that display the data. I will also need to make a four loop that build the 5 day forcast elements since their will be muilple of these these. 
+
 
 
 
