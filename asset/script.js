@@ -131,6 +131,9 @@ function callStarterValue() {
          fivedays.dayC = dataWeekly.list[3];
          fivedays.dayD = dataWeekly.list[4];
          fivedays.dayE = dataWeekly.list[5];
+        //  fivedays.date = dataWeekly.list[i].dt_txt;
+        //  fivedays.temp = dataWeekly.list[i].main.temp;
+        //  fivedays.hum = dataWeekly.list[i].main.humidity;
          console.log(dataWeekly)
          filldaily();
          });
@@ -285,11 +288,6 @@ function fillData() {
 
 }
 
-// currentData.name = data.name
-// currentData.temp = data.main.temp
-// currentData.humi = data.main.humidity
-// currentData.windspeed = data.wind.speed
-// currentData.icon = data.weather[0].icon
 
 var fiveday = document.getElementById("fiveDay")
 
@@ -298,6 +296,12 @@ var fiveday = document.getElementById("fiveDay")
 function filldaily() {
   console.log(fivedays)
   console.log(fivedays.dayA.dt_txt)
+
+  // I need to loop that will run the buliding elements code five times.
+  // for (var i = 0; i < fivedays.length; i++) {
+  // var elements = fivedays[i];
+  // console.log(elements)
+
   //creates the blocks the data will sit in.
   var block = document.createElement("div")
   block.classList.add("datesContain")
@@ -308,16 +312,15 @@ function filldaily() {
   // creates a p tag for the temp
   var tempBlock = document.createElement("p")
   tempBlock.textContent = Math.floor(fivedays.dayA.main.temp);
+  // creates a p tag for the humitiy value
+  var humidit = document.createElement("p")
+  humidit.textContent = Math.floor(fivedays.dayA.main.humidity) + "%";
   fiveday.appendChild(block)
   block.appendChild(dateBlock)
   block.appendChild(tempBlock)
+  block.appendChild(humidit)
+//}
 }
-
-// sample
-// var addHistory = document.createElement("div")
-// addHistory.textContent = elements
-// addHistory.classList.add("history")
-// searchHistory.appendChild(addHistory)
 
 //Call the start of the program.
 checkForToronto (getHistory());
