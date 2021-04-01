@@ -17,6 +17,8 @@ var fivedays = {
 
 };
 
+var weekly = {};
+
 
 //Grabing elements by id
 var searchHistory = document.getElementById("searchHistory");
@@ -72,8 +74,6 @@ function checkForToronto() {
 }; 
 //End of the checkForToronto
 
-
-
 // function that pulls the cities array from local storage
 function getHistory() {
   //localStorage.getItem("Cities")
@@ -85,11 +85,9 @@ function addHistoryItem(x) {
     cities.push("Toronto");
     localStorage.setItem("Cities", JSON.stringify(cities));
     console.log("put Value");
-    callStarterValue ();
+    callStarterValue();
 }
 // end of functions that check history. 
-
-
 
 
 //Calls a starter value so there is always data to display.
@@ -125,12 +123,8 @@ function callStarterValue() {
     fetch(starterValueTwo)
     .then(function (response) {
        if (response.ok) {
-         response.json().then(function (dataWeekly) {
-         fivedays.dayA = dataWeekly.list[1];
-         fivedays.dayB = dataWeekly.list[2];
-         fivedays.dayC = dataWeekly.list[3];
-         fivedays.dayD = dataWeekly.list[4];
-         fivedays.dayE = dataWeekly.list[5];
+        response.json().then(function (dataWeekly) {
+         fivedays.data = dataWeekly.list;
         //  fivedays.date = dataWeekly.list[i].dt_txt;
         //  fivedays.temp = dataWeekly.list[i].main.temp;
         //  fivedays.hum = dataWeekly.list[i].main.humidity;
@@ -162,7 +156,7 @@ function callHistoryApi(){
           if (response.ok) {
             response.json().then(function (data) {
               currentData.name = data.name
-              currentData.temp = data.main.temp
+              currentData.temp = data.main.temp3
               currentData.humi = data.main.humidity
               currentData.windspeed = data.wind.speed
               currentData.icon = data.weather[0].icon
@@ -295,31 +289,30 @@ var fiveday = document.getElementById("fiveDay")
 //build elementsfor the 5 day forecast.
 function filldaily() {
   console.log(fivedays)
-  console.log(fivedays.dayA.dt_txt)
 
-  // I need to loop that will run the buliding elements code five times.
-  // for (var i = 0; i < fivedays.length; i++) {
-  // var elements = fivedays[i];
-  // console.log(elements)
+   for (var i = 0; i < 6; i++) {
+    var elements = fivedays.data[i];
+    console.log(elements);
 
+  //I think I will actally need to come up with a differant way to target the values.
   //creates the blocks the data will sit in.
   var block = document.createElement("div")
   block.classList.add("datesContain")
   //creates a h3 tag for the date
   var dateBlock = document.createElement("h3")
   dateBlock.classList.add("ThisDate")
-  dateBlock.textContent = fivedays.dayA.dt_txt
+  dateBlock.textContent = fivedays.data[i].dt_txt
   // creates a p tag for the temp
   var tempBlock = document.createElement("p")
-  tempBlock.textContent = Math.floor(fivedays.dayA.main.temp);
+  tempBlock.textContent = Math.floor(fivedays.data[i].main.temp);
   // creates a p tag for the humitiy value
   var humidit = document.createElement("p")
-  humidit.textContent = Math.floor(fivedays.dayA.main.humidity) + "%";
+  humidit.textContent = Math.floor(fivedays.data[i].main.humidity) + "%";
   fiveday.appendChild(block)
   block.appendChild(dateBlock)
   block.appendChild(tempBlock)
   block.appendChild(humidit)
-//}
+}
 }
 
 //Call the start of the program.
@@ -331,4 +324,3 @@ checkForToronto (getHistory());
 // Api Link "https://api.openweathermap.org/data/2.5/forecast?q=" CITY NAME HERE  "&appid=key here" 5 day forcast
 //Key 89e0b7e8dbbac9434ed75176dac7f8a3
 // useful video https://www.youtube.com/watch?v=InoAIgBZIEA
-
