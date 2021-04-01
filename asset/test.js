@@ -245,17 +245,6 @@ function fillInData() {
 
 var fiveday = document.getElementById("fiveDay")
 
-
-// function will remove the old children before the new ones are built it only removes elements and dosn't build any new ones.
-    function removeFiveDay() {
-        var blocks = document.querySelectorAll(".datesContain")
-        fiveday.remove(blocks)
-        filldaily ();
-    }
-    
-    
-   
-
     //  attempt to build 
     function filldaily() {
         var fiveDaily = document.querySelector(".fiveDay")
@@ -284,13 +273,21 @@ var fiveday = document.getElementById("fiveDay")
     //}
 };
 
+
+// function will remove the old children before the new ones are built it only removes elements and dosn't build any new ones.
+function removeFiveDay() {
+    var blocks = document.querySelectorAll(".datesContain")
+    fiveday.remove(blocks)
+    filldaily ();
+}
+
   //ORIGINAL I KNOW IT WORKS 
 // // Function builds the elements in the five day weather section
 //     function filldaily() {
 
-//         // for (var i = 0; i < 5; i++) {
-//         // var elements = weeklyData.weekly[i];
-//         // console.log(elements);
+//         for (var i = 0; i < 5; i++) {
+//         var elements = weeklyData.weekly[i];
+//         console.log(elements);
   
 //     //creates the blocks the data will sit in.
 //     var block = document.createElement("div")
@@ -309,8 +306,8 @@ var fiveday = document.getElementById("fiveDay")
 //     //block.appendChild(dateBlock)
 //     block.appendChild(tempBlock)
 //     block.appendChild(humidit)
-//   //}
-//   };
+//   }
+// };
 
 checkForToronto(getHistory());
 buildHistoryElements();
