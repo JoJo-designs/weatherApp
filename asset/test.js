@@ -178,7 +178,8 @@ function callApi(){
                console.log(displayData);
                console.log(weeklyData);
                fillInData();
-               removeFiveDay()
+               filldaily();
+               //removeFiveDay()
               });
             } else {
               console.log('Error: ' + response.statusText);
@@ -252,41 +253,71 @@ var fiveday = document.getElementById("fiveDay")
         filldaily ();
     }
     
+    
+   
 
+    //  attempt to build 
+    function filldaily() {
+        var fiveDaily = document.querySelector(".fiveDay")
+        var dates = document.querySelector(".date")
+        var temps = document.querySelector(".Temp")
+        var humidity = document.querySelector(".humit")
+        console.log(fiveDaily);
 
-// Function builds the elements in the five day weather section
-function filldaily() {
+    // for (var i = 0; i < fiveDaily.length; i++) {
+    //     var spot = fiveDaily[i];
+    //     console.log(spot);
 
-     for (var i = 0; i < 5; i++) {
-      var elements = weeklyData.weekly[i];
-      console.log(elements);
+        for (var i = 1; i < 6; i++) {
+        var elements = weeklyData.weekly[i];
+        console.log(elements);
   
-    //creates the blocks the data will sit in.
-    var block = document.createElement("div")
-    block.classList.add("datesContain")
-    //creates a h3 tag for the date
-    var dateBlock = document.createElement("h3")
-    dateBlock.classList.add("ThisDate")
-    // need a way to make the right date appear the api doesn't have dates.
-    // creates a p tag for the temp
-    var tempBlock = document.createElement("p")
-    tempBlock.textContent = "Temperature: " + Math.floor(weeklyData.weekly[i].temp.day);
-    // creates a p tag for the humitiy value
-    var humidit = document.createElement("p")
-    humidit.textContent = "Humidity: " + Math.floor(weeklyData.weekly[i].humidity) + "%";
-    fiveday.appendChild(block)
-    //block.appendChild(dateBlock)
-    block.appendChild(tempBlock)
-    block.appendChild(humidit)
-  }
-  }
+        //will add the date.
+        dates.textContent = "data"
+        // need a way to make the right date appear the api doesn't have dates which is dumd but fine.
+        // need an image of the weather appear.
+        // adds temp values
+        temps.textContent = "Temperature: " + Math.floor(weeklyData.weekly[i].temp.day);
+        // add humidity value.
+        humidity.textContent = "Humidity: " + Math.floor(weeklyData.weekly[i].humidity) + "%";
+        }
+    //}
+};
+
+  //ORIGINAL I KNOW IT WORKS 
+// // Function builds the elements in the five day weather section
+//     function filldaily() {
+
+//         // for (var i = 0; i < 5; i++) {
+//         // var elements = weeklyData.weekly[i];
+//         // console.log(elements);
+  
+//     //creates the blocks the data will sit in.
+//     var block = document.createElement("div")
+//     block.classList.add("datesContain")
+//     //creates a h3 tag for the date
+//     var dateBlock = document.createElement("h3")
+//     dateBlock.classList.add("ThisDate")
+//     // need a way to make the right date appear the api doesn't have dates which is dumd but fine.
+//     // creates a p tag for the temp
+//     var tempBlock = document.createElement("p")
+//     tempBlock.textContent = "Temperature: " + Math.floor(weeklyData.weekly[i].temp.day);
+//     // creates a p tag for the humitiy value
+//     var humidit = document.createElement("p")
+//     humidit.textContent = "Humidity: " + Math.floor(weeklyData.weekly[i].humidity) + "%";
+//     fiveday.appendChild(block)
+//     //block.appendChild(dateBlock)
+//     block.appendChild(tempBlock)
+//     block.appendChild(humidit)
+//   //}
+//   };
 
 checkForToronto(getHistory());
 buildHistoryElements();
 
 // List of what it does so far.
-// searches the lat and lon of a value input by a user. Adds the value to local storage
-// searches for the data for toronto when lanuched and pushs the value to local storage and no override or repeat addition
+// searches the lat and lon of a value input by a user. Adds the city name to local storage
+// searches for the data for toronto when lanuched and pushs the value to local storage and no override or repeat addition.
 // builds elements for the values in local storage.
 // elements in the history clickable and have them call the geocodeing api the the weather api.
 // retrive the needed data from the api and push them onto the global scope.
