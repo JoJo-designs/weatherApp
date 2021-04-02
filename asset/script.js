@@ -278,7 +278,7 @@ function fillData() {
   humi.textContent = currentData.humi + "%";
   windspeed.textContent= Math.floor(currentData.windspeed);
   // need Help connecting the images to the page
-  //img.textContent("src", image)
+  //img.innerHTML("src", image)
 
 }
 
