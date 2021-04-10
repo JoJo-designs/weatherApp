@@ -7,33 +7,39 @@
     </header>
     <body>
         <!--Items in the head-->
-        <head>
-            <h1>This is the header</h1>
+        <head class="top">
+            <h1>Weather Dashboard</h1>
         </head>
         <!--Aside with search bar and the search history. About 25% of the screen with at larger sizes-->
-        <aside>
+        <aside class="searchArea">
+            <h4>Search for Cities</h4>
             <input id="searchCities"><button id="search">Search</button>
             <!--when a city is searched The system will append a div as a child to this section div with 
             the city name in it. I guess it will also be a quick link to the city in the future.-->
             <section id="searchHistory"></section> 
         </aside>
         <!--Current temps for a selected city.-->
+    <section class="all">
         <section id="currentCity">
             <div id="currentWather">
-                <h2 id="nameCity">Toronto</h2>
-                <h2 id="date"></h2>
-                <p id="temp"> Temp</p>
-                <p id="humidiy">humidiy</p>
-                <p id="wind"> Wind Speed</p>
-                <p id="uvIndex">UV</p>
-                <img id="weatherPicOne">
-
+                <h2 class="infobig" id="nameCity">Toronto</h2>
+                <p class="info" id="date"></p>
+                <p class="info" id="temp"> Temp</p>
+                <p class="info" id="humidiy">humidiy</p>
+                <p class="info" id="wind"> Wind Speed</p>
+                <p class="info" id="uvIndex">UV</p>
+                <aside class="move"><img id="weatherPicOne">
+                <p class="des" id="des"></p></aside>
             </div>
+        </section>      
+         
             <!--five Day forcast is here-->
+            <h5>5-Day Forecast</h5>
             <section id="fiveDay">
             </section>
-        </section>
+    </section>     
     </body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <script src="./asset/test.js"></script>
 </html>

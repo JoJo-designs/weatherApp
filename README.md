@@ -16,6 +16,10 @@ What I still need to accomplish is finding a way to push the retrived data value
 
 My next step is to build the five day forecast. I think I will start by making and appending the data for one day after I do that I will build a forloop to handle the rest. 
 
+I am A little upset I just can to a Awful realization. I was calling the wrong API's I was on the right site but there was one api that would have given me all the data for both areas. I am actally really upset right now. I really thougth I was doing a good job with this one. I guess I have to start from scratch. well not scratch I think I have a pretty good starting point I just need to change the apis.
+
+To get all the data I need in from one api I need to call an api that will give me the lat and lon values. Becuase for whatever reason the one-call api can't take just a city name I think it is dumd but I will call the Geocodeing api and take the lat and lon values and than use them to call the api for the given city.
+
 
 
 

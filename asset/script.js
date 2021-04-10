@@ -278,10 +278,9 @@ function fillData() {
   humi.textContent = currentData.humi + "%";
   windspeed.textContent= Math.floor(currentData.windspeed);
   // need Help connecting the images to the page
-  //img.innerHTML("src", image)
+  img.innerHTML("src", image)
 
 }
-
 
 var fiveday = document.getElementById("fiveDay")
 
