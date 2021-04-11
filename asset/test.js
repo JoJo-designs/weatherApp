@@ -221,7 +221,7 @@ var windspeed = document.querySelector("#wind")
 var uvi = document.querySelector("#uvIndex")
 var img = document.querySelector("#weatherPicOne")
 var image = '';
-var des = document.querySelector("#des")
+//var des = document.querySelector("#des") adds weather discription
 
 function fillInData() {
   nameCity.textContent = latAndLon.nameCity + " Current Weather";
@@ -241,19 +241,7 @@ function fillInData() {
   } else {
     uvi.classList.add("high")
   }
-  //need some help to get the image
 }
-
-// UV Index range low 1-3 mid 4-6 high 7+
-
-
-// displayData.temp = data.current.temp;
-// displayData.humi = data.current.humidity;
-// displayData.uvi = data.current.uvi;
-// displayData.windspeed = data.current.wind_speed;
-// displayData.icon = data.current.weather[0].icon;
-// displayData.desc = data.current.weather[0].description;
-// weeklyData.weekly = data.daily;
 
 var fiveday = document.getElementById("fiveDay")
 
@@ -296,12 +284,16 @@ function filldaily() {
     var image = document.createElement("img")
     image.classList.add("fivedayimage")
     image.setAttribute("src", "http://openweathermap.org/img/w/" + imag + ".png");
+
     // creates a p tag for the temp
     var tempBlock = document.createElement("p")
     tempBlock.textContent = "Temperature: " + Math.floor(weeklyData.weekly[i].temp.day);
+
     // creates a p tag for the humitiy value
     var humidit = document.createElement("p")
     humidit.textContent = "Humidity: " + Math.floor(weeklyData.weekly[i].humidity) + "%";
+    
+    //AppendChildren to the DOM
     fiveday.appendChild(block)
     block.appendChild(dateBlock)
     block.appendChild(image)
