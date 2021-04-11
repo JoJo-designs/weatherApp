@@ -259,9 +259,7 @@ function filldaily() {
   //dates are unix time stamped. need to convert from unix to normal time. this works but only give me Api 10 or Jan 19??
   var nextDay = moment(weeklyData.weekly.dt).format("ddd MMM, D");
   console.log(nextDay)
-  var nextDay2 = moment(weeklyData.weekly.dt).format("ddd MMM, D");
-  console.log(nextDay2)
-
+  
   for (var i = 0; i < 5; i++) {
     var elements = weeklyData.weekly[i];
     console.log(elements);
