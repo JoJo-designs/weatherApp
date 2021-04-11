@@ -2,6 +2,10 @@
 
 The goal of this assigment is to bulid an app that will use the open weather api to inform the user about the weather in meny differant cities. It should have the ability to search for cities and display a wide range of data for the city. inclueing a 5 day forcast current conditions and the UV index.
 
+link to the live https://jojo-designs.github.io/weatherApp/
+repo link https://github.com/JoJo-designs/weatherApp
+
+
 No starter files were provided for this assigment.
 
 The frist thing I completed was to make the elements I would needed in the html. 
@@ -19,6 +23,11 @@ My next step is to build the five day forecast. I think I will start by making a
 I am A little upset I just can to a Awful realization. I was calling the wrong API's I was on the right site but there was one api that would have given me all the data for both areas. I am actally really upset right now. I really thougth I was doing a good job with this one. I guess I have to start from scratch. well not scratch I think I have a pretty good starting point I just need to change the apis.
 
 To get all the data I need in from one api I need to call an api that will give me the lat and lon values. Becuase for whatever reason the one-call api can't take just a city name I think it is dumd but I will call the Geocodeing api and take the lat and lon values and than use them to call the api for the given city.
+
+I stopped updating the Readme for a while. Basically I have the whole thing working now. I would useally write a reflection for my assingments when completed but since I spent so much time on this on I just want to get it off my plate.
+
+Screen shots 
+![The landing page](/image/app_pic.jpg?raw=true "Landing Page")
 
 
 
