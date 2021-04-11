@@ -3,6 +3,7 @@
 body{
     background-image: url("./img/background.jpg");
     max-width: 100%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 h1 {
@@ -86,13 +87,6 @@ h2 {
     margin: 10px;
 }
 
-.move{
-    float: right;
-    display: inline;
-    margin-right: 100px;
-    background-color: grey;
-}
-
 /* The three below are for the UV index value*/
 .low{
     background-color: green;
@@ -150,6 +144,7 @@ h5 {
 p{
     display: block;
     width: 100%;
+    margin-top: 8px;
 }
 
 /* mobile version alterations will be under here.*/

@@ -256,11 +256,8 @@ function removeFiveDay() {
 // Function builds the elements in the five day weather section
 function filldaily() {
   
-  //dates are unix time stamped. need to convert from unix to normal time. this works but only give me Api 10 or Jan 19??
-  var nextDay = moment(weeklyData.weekly.dt).format("ddd MMM, D");
-  console.log(nextDay)
-  
-  for (var i = 0; i < 5; i++) {
+
+  for (var i = 1; i < 6; i++) {
     var elements = weeklyData.weekly[i];
     console.log(elements);
 
@@ -274,7 +271,7 @@ function filldaily() {
     //creates a h3 tag for the date
     var dateBlock = document.createElement("h3")
     dateBlock.classList.add("ThisDate")
-    var nextDay = moment(weeklyData.weekly[i].dt).format("ddd MMM, D");
+    var nextDay = moment(weeklyData.weekly[i].dt*1000).format("ddd MMM, D");
     console.log(nextDay)
     dateBlock.textContent = nextDay;
 
