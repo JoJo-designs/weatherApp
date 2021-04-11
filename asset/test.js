@@ -276,7 +276,7 @@ function filldaily() {
     //creates a h3 tag for the date
     var dateBlock = document.createElement("h3")
     dateBlock.classList.add("ThisDate")
-    var nextDay = moment(weeklyData.weekly[i].dt[i]).format("ddd MMM, D");
+    var nextDay = moment(weeklyData.weekly[i].dt).format("ddd MMM, D");
     console.log(nextDay)
     dateBlock.textContent = nextDay;
 
